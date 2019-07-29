@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import store, {INGREDIENTS} from '../../store'
+import store, {INGREDIENTS, CLEAR_INGREDIENTS} from '../../store'
 
 class Ingredients extends Component {
   constructor(props) {
@@ -17,6 +17,12 @@ class Ingredients extends Component {
       this.setState({
         ingredients: reduxState.ingredients
       })
+    })
+    this.clearIngredients()
+  }
+  clearIngredients() {
+    store.dispatch({
+      type: CLEAR_INGREDIENTS
     })
   }
   handleChange(val) {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import store, {INSTRUCTIONS, RECIPES} from '../../store'
+import store, {INSTRUCTIONS, RECIPES, CLEAR_INSTRUCTIONS} from '../../store'
 
 class Instructions extends Component {
   constructor(props) {
@@ -18,11 +18,18 @@ class Instructions extends Component {
         instructions: reduxState.instructions
       })
     })
+    this.clearItem()
   }
+
   handleChange(val) {
     this.setState({
       input: val
     });
+  }
+  clearItem() {
+    store.dispatch({
+      type: CLEAR_INSTRUCTIONS
+    })
   }
   addInstruction() {
     // Send data to Redux state

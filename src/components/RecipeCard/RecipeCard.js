@@ -1,5 +1,6 @@
 import React from "react";
 import "./RecipeCard.css";
+import store, { DELETE } from '../../store'
 
 let RecipeCard = props => {
   const {
@@ -16,6 +17,12 @@ let RecipeCard = props => {
   const instructionsDisplay = instructions.map((instruction, i) => {
     return <li key={i}>{instruction}</li>;
   });
+  let deleteRecipe = (index) => {
+    store.dispatch({
+      type: DELETE,
+      payload: index
+    })
+  }
   return (
     <div className="RecipeCard">
       <div className="title_container">
@@ -34,6 +41,7 @@ let RecipeCard = props => {
         <ol className="list">{instructionsDisplay}</ol>
       </div>
       <svg
+        onClick={() => deleteRecipe()}
         className="delete"
         width="60"
         height="60"

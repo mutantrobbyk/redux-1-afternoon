@@ -12,7 +12,14 @@ class Home extends Component {
       recipes: reduxState.recipes
     };
   }
-
+componentDidMount() {
+  store.subscribe(() => {
+    const reduxState = store.getState()
+    this.setState({
+      recipes: reduxState.recipes
+    })
+  })
+}
   render() {
     const recipes = this.state.recipes.map((recipe, i) => {
       return (

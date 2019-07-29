@@ -17,6 +17,9 @@ export const LAST_NAME = "LAST_NAME";
 export const INGREDIENTS = "INGREDIENTS";
 export const INSTRUCTIONS = "INSTRUCTIONS";
 export const RECIPES = "RECIPES";
+export const DELETE = 'DELETE'
+export const CLEAR_INGREDIENTS = 'CLEAR_INGREDIENTS'
+export const CLEAR_INSTRUCTIONS = 'CLEAR_INSTRUCTIONS'
 
 function reducer(state = initialState, action) {
   const { type, payload } = action;
@@ -35,6 +38,14 @@ function reducer(state = initialState, action) {
     case INSTRUCTIONS:
       const newInstructions = [...state.instructions, payload];
       return { ...state, instructions: newInstructions };
+    case DELETE:
+        const newList = [...state.recipes]
+        newList.splice(action.payload, 1)
+        return {...state, recipes: newList}
+    case CLEAR_INGREDIENTS:
+        return {...state, ingredients:[]}
+    case CLEAR_INSTRUCTIONS:
+        return {...state, instructions:[]}
     case RECIPES:
       const {
         recipeName,
