@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./Name.css";
+import store, {UPDATE_CATEGORY, UPDATE_RECIPE} from '../../store'
 
 class Name extends Component {
   constructor(props) {
     super(props);
+    const reduxState = store.getState()
     this.state = {
-      name: '',
-      category: ''
+      name: reduxState.name,
+      category: reduxState.category
     };
   }
   handleNameChange(nameVal) {
@@ -15,7 +17,7 @@ class Name extends Component {
       name: nameVal
     });
   }
-
+  
   handleCategoryChange(catVal) {
     this.setState({
       category: catVal
@@ -23,7 +25,16 @@ class Name extends Component {
   }
   saveChanges() {
     // Send data to Redux state
+    store.dispatch({
+      type: UPDATE_RECIPE,
+      payload: this.state.name
+    })
+    store.dispatch({
+      type: UPDATE_CATEGORY,
+      payload: this.state.category
+    })
   }
+  
   render() {
     return (
       <div className="Name forms">
